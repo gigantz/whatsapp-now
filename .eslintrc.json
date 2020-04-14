@@ -1,0 +1,51 @@
+{
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "plugins": ["prettier", "import"],
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "globals": {
+    "window": true,
+    "Promise": true,
+    "chrome": true
+  },
+  "rules": {
+    "no-console": [
+      "error",
+      {
+        "allow": ["warn", "error"]
+      }
+    ],
+    "camelcase": ["error", { "properties": "never" }],
+    "no-undef": "warn",
+    "no-unused-vars": ["error", { "ignoreRestSiblings": true }],
+    "multiline-comment-style": ["error", "separate-lines"],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single", { "avoidEscape": true }],
+    "semi": ["error", "always"],
+    "comma-dangle": ["error", "always-multiline"],
+    "no-shadow": "off",
+    "no-param-reassign": "off",
+    "object-curly-newline": [
+      "error",
+      { "multiline": true, "consistent": true }
+    ],
+    "space-in-parens": ["error", "never"],
+    "import/first": "error",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "quote-props": "off",
+    "arrow-parens": "off",
+    "max-len": [
+      "warn",
+      {
+        "code": 120
+      }
+    ]
+  }
+}
