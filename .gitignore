@@ -1,5 +1,5 @@
 node_modules
 .vscode
-./dist
 content.js
 *.pem
+dist
