@@ -3,3 +3,4 @@ node_modules
 ./content.js
 *.pem
 dist
+dist.zip

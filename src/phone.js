@@ -25,6 +25,6 @@ export const checkPhoneNumber = (phoneNumber, countryCode) => {
       console.log({ error });
     }
   } catch (e) {
-    return { formatted: number, isValid: "", success: false, code: "" };
+    return { formatted: phoneNumber, isValid: "", success: false, code: "" };
   }
 };

@@ -4,7 +4,6 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "country-data": "0.0.31",
     "google-libphonenumber": "^3.2.8",
     "moment-timezone": "^0.5.28"
   },
