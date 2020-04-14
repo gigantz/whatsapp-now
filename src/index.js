@@ -1,6 +1,6 @@
 // @ts-nocheck
 import * as fix from "./phone";
-import visitorInfo from "visitor-info";
+import visitorInfo from "./visitorInfo";
 const IGNORE_DOMAINS = ["com", "org", "net", "co", "io"];
 
 const makeLink = (phone) => {
@@ -19,15 +19,10 @@ const makeLink = (phone) => {
       const foundCountryCode = IGNORE_DOMAINS.includes(domain)
         ? countryFromTimeZone
         : domain;
-
-      const withPlus = phone[0] === "+";
-      const [bestSuggestion] = withPlus ? fix.suggestion(phone) : [];
       const { formatted } = fix.check(phone, foundCountryCode.toLowerCase());
 
       chrome.tabs.create({
-        url: `https://web.whatsapp.com/send?phone=${
-          bestSuggestion ? bestSuggestion.formatted : formatted
-        }`,
+        url: `https://web.whatsapp.com/send?phone=${formatted}`,
       });
     }
   );
@@ -51,8 +46,6 @@ chrome.commands.onCommand.addListener(function (command) {
     );
   }
 });
-
-chrome.contextMenus.removeAll();
 
 chrome.contextMenus.create({
   title: "WhatsApp Message",

@@ -1,34 +1,34 @@
-import countryCodes from "./countryCodes.json";
-import { PhoneNumberFormat } from "google-libphonenumber";
-import { PhoneNumberUtil } from "google-libphonenumber";
+import {
+  PhoneNumberFormat,
+  PhoneNumberUtil,
+  PhoneNumber,
+} from "google-libphonenumber";
 const phoneUtil = PhoneNumberUtil.getInstance();
 
 export const check = (number, countryCode) => {
   try {
-    var phoneNumber = phoneUtil.parse(number.split("+").join(""), countryCode);
-    var output = {
-      formatted: phoneUtil
-        .format(phoneNumber, PhoneNumberFormat.INTERNATIONAL)
-        .replace(/ /g, ""),
-      isValid: phoneUtil.isValidNumber(phoneNumber),
-      success: true,
-      code: countryCode,
-    };
-    return output;
+    const phoneRaw = phoneUtil.parseAndKeepRawInput(number);
+    const withPlus =
+      phoneRaw.countryCodeSourceCount() ===
+      PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN;
+
+    try {
+      const phoneNumber = phoneUtil.parse(
+        number,
+        (!withPlus && countryCode) || ""
+      );
+
+      const output = {
+        formatted: phoneUtil.format(phoneNumber, PhoneNumberFormat.E164),
+        isValid: phoneUtil.isValidNumber(phoneNumber),
+        success: true,
+        code: countryCode,
+      };
+      return output;
+    } catch (error) {
+      console.log({ error });
+    }
   } catch (e) {
     return { formatted: "", isValid: "", success: false, code: "" };
   }
-};
-
-export const suggestion = (number) => {
-  var suggestions = [];
-  countryCodes.forEach((country) => {
-    try {
-      var output = check(number, country.code);
-      if (output.isValid) {
-        suggestions.push(output);
-      }
-    } catch (e) {}
-  });
-  return suggestions;
 };

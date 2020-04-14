@@ -12,10 +12,10 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "fix-phone": "^1.11.0",
+    "country-data": "0.0.31",
+    "moment-timezone": "^0.5.28",
     "parcel-bundler": "^1.12.4",
-    "phone-number-fixer": "^1.0.7",
-    "visitor-info": "^0.2.4"
+    "phone-number-fixer": "^1.0.7"
   },
   "name": "whatsapp-now",
   "version": "1.0.0",
@@ -23,9 +23,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --watch --mode=production",
-    "prod": "reset && copy-all && webpack --mode=production",
-    "copy-all": "cp ./manifest.json ./dist && cp ./images ./dist/images",
-    "reset": "rm -rf dist"
+    "prod": "npm run reset && npm run copy-all && webpack -p --mode=production",
+    "copy-all": "mkdir ./dist && cp ./manifest.json ./dist && cp -R ./images ./dist/images",
+    "reset": "rm -rf ./dist"
   },
   "keywords": [],
   "author": "",

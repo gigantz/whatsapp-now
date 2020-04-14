@@ -13,9 +13,6 @@
   "background": { 
     "scripts": ["index.js"]
   },
-  "browser_action": {
-    "default_icon": "images/icons/favicon-32x32-dunplab-manifest-713.png"
-  },
   "icons": {
     "16": "images/icons/favicon-16x16-dunplab-manifest-713.png",
     "32": "images/icons/favicon-32x32-dunplab-manifest-713.png",
@@ -28,6 +25,9 @@
   "web_accessible_resources": [
     "images/icons/favicon-16x16-dunplab-manifest-713.png"
   ],
+  "browser_action": {
+    "default_icon": "images/icons/favicon-32x32-dunplab-manifest-713.png"
+  },
   "commands": {
     "hotkey-whatsapp": {
       "suggested_key": {
