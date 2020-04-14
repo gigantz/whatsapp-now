@@ -1,36 +1,41 @@
-import * as fix from "./phone";
-import visitorInfo from "./visitorInfo";
-const IGNORE_DOMAINS = ["com", "org", "net", "co", "io"];
+import { checkPhoneNumber } from "./phone";
+import { visitorInfo } from "./visitorInfo";
+import { IGNORE_DOMAINS_EXT } from "./constants";
 
-const makeLink = (phone) => {
-  const { country } = visitorInfo();
-  const { alpha2: countryFromTimeZone } = country || { alpha2: "az" };
+function generateWhatsAppURL(phone) {
+  const { countryCode: countryFromTimeZone } = visitorInfo();
 
   chrome.tabs.query(
     {
       active: true,
+      currentWindow: true,
     },
     function (tabs) {
-      const tab = tabs[0];
-      const url = new URL(tab.url);
+      const [activeTab] = tabs;
+      const url = new URL(activeTab.url);
       const urlParts = url.hostname.split(".");
-      const domain = urlParts[urlParts.length - 1];
-      const foundCountryCode = IGNORE_DOMAINS.includes(domain)
+      const domainExt = urlParts[urlParts.length - 1];
+      const foundCountryCode = IGNORE_DOMAINS_EXT.includes(domainExt)
         ? countryFromTimeZone
-        : domain;
-      const { formatted } = fix.check(phone, foundCountryCode.toLowerCase());
+        : domainExt;
+      const { formatted } = checkPhoneNumber(
+        phone,
+        foundCountryCode.toLowerCase()
+      );
 
-      chrome.tabs.create({
-        url: `https://web.whatsapp.com/send?phone=${formatted}`,
-      });
+      chrome.tabs.sendMessage(activeTab.id, { formattedPhone: formatted });
     }
   );
-};
-
-function sendMessage(info) {
-  if (!info || (info && !info.selectionText)) return;
-  makeLink(info.selectionText.trim());
 }
+
+function selectedText(info) {
+  if (!(info || {}).selectionText) return;
+  generateWhatsAppURL(info.selectionText.trim());
+}
+
+chrome.runtime.onMessage.addListener(function (request) {
+  if (request.phone) generateWhatsAppURL(request.phone.trim());
+});
 
 chrome.commands.onCommand.addListener(function (command) {
   if (command === "hotkey-whatsapp") {
@@ -38,9 +43,9 @@ chrome.commands.onCommand.addListener(function (command) {
       {
         code: "window.getSelection().toString();",
       },
-      function (text) {
+      (text) => {
         const selectionText = Array.isArray(text) ? text[0] : text;
-        sendMessage({ selectionText });
+        generateWhatsAppURL(selectionText);
       }
     );
   }
@@ -49,11 +54,5 @@ chrome.commands.onCommand.addListener(function (command) {
 chrome.contextMenus.create({
   title: "WhatsApp Message",
   contexts: ["selection"],
-  onclick: sendMessage,
-});
-
-chrome.browserAction.onClicked.addListener(function () {
-  chrome.tabs.create({
-    url: "https://web.whatsapp.com/",
-  });
+  onclick: selectedText,
 });

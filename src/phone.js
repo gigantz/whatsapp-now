@@ -1,34 +1,30 @@
 import {
   PhoneNumberFormat,
   PhoneNumberUtil,
-  PhoneNumber,
 } from "google-libphonenumber";
 const phoneUtil = PhoneNumberUtil.getInstance();
 
-export const check = (number, countryCode) => {
+export const checkPhoneNumber = (phoneNumber, countryCode) => {
   try {
-    const phoneRaw = phoneUtil.parseAndKeepRawInput(number);
-    const withPlus =
-      phoneRaw.countryCodeSourceCount() ===
-      PhoneNumber.CountryCodeSource.FROM_NUMBER_WITH_PLUS_SIGN;
-
+    const withPlus = !phoneNumber.indexOf('+');
     try {
-      const phoneNumber = phoneUtil.parse(
-        number,
-        (!withPlus && countryCode) || ""
+      const parsedPhoneNumber = phoneUtil.parse(
+        phoneNumber,
+        withPlus ? "" : countryCode.toUpperCase()
       );
 
       const output = {
-        formatted: phoneUtil.format(phoneNumber, PhoneNumberFormat.E164),
-        isValid: phoneUtil.isValidNumber(phoneNumber),
+        formatted: phoneUtil.format(parsedPhoneNumber, PhoneNumberFormat.E164),
+        isValid: phoneUtil.isValidNumber(parsedPhoneNumber),
         success: true,
         code: countryCode,
       };
+
       return output;
     } catch (error) {
       console.log({ error });
     }
   } catch (e) {
-    return { formatted: "", isValid: "", success: false, code: "" };
+    return { formatted: number, isValid: "", success: false, code: "" };
   }
 };
