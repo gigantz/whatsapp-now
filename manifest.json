@@ -4,14 +4,8 @@
   "short_name": "wpnow",
   "manifest_version": 2,
   "description": "Send WhatsApp message to your selected phone number on any web page",
-  "permissions": [
-    "contextMenus",
-    "tabs",
-    "https://*/",
-    "http://*/",
-    "storage"
-   ],
-  "background": { 
+  "permissions": ["contextMenus", "activeTab", "<all_urls>"],
+  "background": {
     "scripts": ["index.js"]
   },
   "icons": {
@@ -29,12 +23,14 @@
   "browser_action": {
     "default_icon": "images/icons/favicon-32x32-dunplab-manifest-314.png"
   },
-  "content_scripts": [{
-    "matches": ["<all_urls>"],
-    "all_frames": true,
-    "js": ["content.js"],
-    "run_at": "document_end"
-  }],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "all_frames": true,
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ],
   "commands": {
     "hotkey-whatsapp": {
       "suggested_key": {
