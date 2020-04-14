@@ -1,4 +1,3 @@
-// @ts-nocheck
 import * as fix from "./phone";
 import visitorInfo from "./visitorInfo";
 const IGNORE_DOMAINS = ["com", "org", "net", "co", "io"];
