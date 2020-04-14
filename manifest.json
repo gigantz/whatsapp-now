@@ -11,7 +11,7 @@
     "http://*/"
    ],
   "background": { 
-    "scripts": ["dist/index.js"]
+    "scripts": ["index.js"]
   },
   "icons": {
     "16": "images/icons/favicon-16x16-dunplab-manifest-713.png",
