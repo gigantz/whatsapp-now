@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.2",
   "name": "WhatsApp Now",
   "short_name": "wpnow",
   "manifest_version": 2,
@@ -13,7 +13,7 @@
     "32": "images/icons/favicon-32x32-dunplab-manifest-314.png",
     "72": "images/icons/apple-icon-72x72-dunplab-manifest-314.png",
     "114": "images/icons/apple-icon-114x114-dunplab-manifest-314.png",
-    "144": "images/icons/apple-icon-144x144-dunplab-manifest-314.png",
+    "128": "images/icons/apple-icon-128x128-dunplab-manifest-314.png",
     "152": "images/icons/apple-icon-152x152-dunplab-manifest-314.png",
     "384": "images/icons/apple-icon-180x180-dunplab-manifest-314.png"
   },
