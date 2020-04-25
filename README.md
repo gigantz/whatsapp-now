@@ -1,6 +1,7 @@
 # Chrome extenstion WhatsApp Now
 
 You can send WhatsApp messages to selected phone number without adding them into your contacts.
+https://chrome.google.com/webstore/detail/whatsapp-now/kigcbfdeadlfgiabcnfklofgddaobdcf
 
 Feel free to contribute and improve the extension
 
