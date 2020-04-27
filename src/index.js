@@ -52,7 +52,7 @@ chrome.commands.onCommand.addListener(function (command) {
 });
 
 chrome.contextMenus.create({
-  title: 'WhatsApp Message',
+  title: 'Message Now',
   contexts: ['selection'],
   onclick: selectedText,
 });
