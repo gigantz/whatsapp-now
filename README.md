@@ -5,7 +5,7 @@ https://chrome.google.com/webstore/detail/whatsapp-now/kigcbfdeadlfgiabcnfklofgd
 
 Feel free to contribute and improve the extension
 
-Features:
+### Features:
 - [x] Parse any phone number format
 - [x] Catch click event on a[tel:\*]
 - [x] HotKey `Ctrl + Shift + Y` / `Cmd + Shift + Y`
