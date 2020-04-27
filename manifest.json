@@ -1,6 +1,6 @@
 {
   "version": "1.0.2",
-  "name": "WhatsApp Now",
+  "name": "Message Now for WhatsApp™",
   "short_name": "wpnow",
   "manifest_version": 2,
   "description": "Send WhatsApp message to your selected phone number on any web page",
@@ -37,7 +37,7 @@
         "default": "Ctrl+Shift+Y",
         "mac": "Command+Shift+Y"
       },
-      "description": "Send WhatsApp message"
+      "description": "Message Now"
     }
   }
 }
