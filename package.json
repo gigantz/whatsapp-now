@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "google-libphonenumber": "^3.2.8",
-    "moment-timezone": "^0.5.28"
+    "moment-timezone": "^0.5.35"
   },
   "name": "whatsapp-now",
   "version": "1.0.0",
